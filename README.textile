@@ -45,17 +45,12 @@ bc(java). public static class Example implements Token {
 And the @main@ method:
 
 bc(java). public static void main(String[] args) {
-
 	Example example = new Example();
 	CipherType cipher = CipherType.AES;
 	String password = "secret password";
-
 	String token = Tokenizer.tokenize(example, cipher, password);
-
 	System.out.println("token:  " + token);
-
 	Example checkme = Tokenizer.objectify(Example.class, token, cipher, password);
-
 	System.out.println("id:     " + checkme.id);
 	System.out.println("secret: " + checkme.secret);
 	System.out.println("sn:     " + checkme.sn);
