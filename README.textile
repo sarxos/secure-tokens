@@ -76,6 +76,5 @@ bc(java). public static void main(String[] args) {
 
 This will print:
 
-bc. 
-token:  id=4#sn=CZC14057LY#sec=secret.information.is.here
+bc. token:  id=4#sn=CZC14057LY#sec=secret.information.is.here
 
