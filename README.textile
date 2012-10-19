@@ -22,8 +22,9 @@ h1. Example
 
 Below there are some secret information in Example class. We would like to encrypt them and send to some 3 ^rd^ party system along with some kind of request identification - in this case this will be computer serial number obtained from @Hardware@ class.
 
-bc(java).. 
-public static class Example implements Token {
+Assume we have the following class:
+
+bc(java). public static class Example implements Token {
 	/**
 	 * Some kind of secret data.
 	 */
@@ -39,11 +40,11 @@ public static class Example implements Token {
 	 */
 	@TokenPart("sn")
 	protected String sn = Hardware.getSerialNumber();
-
-	// setters/getters
 }
 
-public static void main(String[] args) {
+And the @main@ method:
+
+bc(java). public static void main(String[] args) {
 
 	Example example = new Example();
 	CipherType cipher = CipherType.AES;
@@ -59,7 +60,6 @@ public static void main(String[] args) {
 	System.out.println("secret: " + checkme.secret);
 	System.out.println("sn:     " + checkme.sn);
 }
-p. 
 
 The output will be:
 
