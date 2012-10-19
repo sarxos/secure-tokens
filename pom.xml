@@ -17,7 +17,11 @@
 	<version>0.1-SNAPSHOT</version>
 
 	<name>Web Token</name>
-	<description>Set of classes to help manipulate URL tokens</description>
+	<description>
+		Small set of tools allowing you to create secure encrypted tokens, which 
+		can be later exchanged with 3rd party systems or stored as a license 
+		files
+	</description>
 	<url>https://github.com/sarxos/${project.artifactId}</url>
 	<inceptionYear>2012</inceptionYear>
 

@@ -7,7 +7,7 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-import com.github.sarxos.securetoken.impl.CipherType;
+import com.github.sarxos.securetoken.CipherType;
 
 
 @Inherited

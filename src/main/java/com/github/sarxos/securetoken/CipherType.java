@@ -1,4 +1,4 @@
-package com.github.sarxos.securetoken.impl;
+package com.github.sarxos.securetoken;
 
 import org.bouncycastle.crypto.Digest;
 import org.bouncycastle.crypto.ExtendedDigest;

@@ -6,7 +6,6 @@ import java.util.EnumSet;
 import org.junit.Test;
 
 import com.github.sarxos.securetoken.annotation.TokenPart;
-import com.github.sarxos.securetoken.impl.CipherType;
 
 
 public class TokenizerTest {

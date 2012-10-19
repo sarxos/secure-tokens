@@ -22,6 +22,8 @@ import org.bouncycastle.crypto.macs.HMac;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 import org.bouncycastle.util.Strings;
 
+import com.github.sarxos.securetoken.CipherType;
+
 
 public class CipherEngine {
 

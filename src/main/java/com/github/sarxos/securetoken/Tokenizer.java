@@ -14,7 +14,6 @@ import org.bouncycastle.util.encoders.Base64;
 import com.github.sarxos.securetoken.annotation.TokenEntity;
 import com.github.sarxos.securetoken.annotation.TokenPart;
 import com.github.sarxos.securetoken.impl.CipherEngine;
-import com.github.sarxos.securetoken.impl.CipherType;
 import com.github.sarxos.securetoken.impl.Converters;
 import com.github.sarxos.securetoken.impl.GZIP;
 import com.github.sarxos.securetoken.impl.Reflector;
