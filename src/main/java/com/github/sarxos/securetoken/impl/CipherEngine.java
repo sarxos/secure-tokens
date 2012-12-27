@@ -115,9 +115,12 @@ public class CipherEngine {
 		byte[] hmac = new byte[digest.getDigestSize()];
 		byte[] data = Strings.toUTF8ByteArray(string);
 
-		HMac h = new HMac(digest);
-		h.update(data, 0, data.length);
-		h.doFinal(hmac, 0);
+		synchronized(digest) {
+			HMac h = new HMac(digest);
+			h.update(data, 0, data.length);
+			h.doFinal(hmac, 0);
+			digest.reset();
+		}
 
 		return hmac;
 	}
