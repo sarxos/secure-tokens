@@ -13,9 +13,20 @@ public class Hardware4Nix {
 
 	public static final String getSerialNumber() {
 
-		if (sn != null) {
-			return sn;
+		if (sn == null) {
+			readDmidecode();
 		}
+		if (sn == null) {
+			readLshal();
+		}
+		if (sn == null) {
+			throw new RuntimeException("Cannot find computer SN");
+		}
+
+		return sn;
+	}
+
+	private static BufferedReader read(String command) {
 
 		OutputStream os = null;
 		InputStream is = null;
@@ -23,7 +34,7 @@ public class Hardware4Nix {
 		Runtime runtime = Runtime.getRuntime();
 		Process process = null;
 		try {
-			process = runtime.exec(new String[] { "dmidecode", "-t", "system" });
+			process = runtime.exec(command.split(" "));
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}
@@ -37,10 +48,17 @@ public class Hardware4Nix {
 			throw new RuntimeException(e);
 		}
 
-		BufferedReader br = new BufferedReader(new InputStreamReader(is));
+		return new BufferedReader(new InputStreamReader(is));
+	}
+
+	private static void readDmidecode() {
+
 		String line = null;
 		String marker = "Serial Number:";
+		BufferedReader br = null;
+
 		try {
+			br = read("dmidecode -t system");
 			while ((line = br.readLine()) != null) {
 				if (line.indexOf(marker) != -1) {
 					sn = line.split(marker)[1].trim();
@@ -50,17 +68,40 @@ public class Hardware4Nix {
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		} finally {
-			try {
-				is.close();
-			} catch (IOException e) {
-				throw new RuntimeException(e);
+			if (br != null) {
+				try {
+					br.close();
+				} catch (IOException e) {
+					throw new RuntimeException(e);
+				}
 			}
 		}
+	}
 
-		if (sn == null) {
-			throw new RuntimeException("Cannot find computer SN");
+	private static void readLshal() {
+
+		String line = null;
+		String marker = "system.hardware.serial =";
+		BufferedReader br = null;
+
+		try {
+			br = read("lshal");
+			while ((line = br.readLine()) != null) {
+				if (line.indexOf(marker) != -1) {
+					sn = line.split(marker)[1].replaceAll("\\(string\\)|(\\')", "").trim();
+					break;
+				}
+			}
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		} finally {
+			if (br != null) {
+				try {
+					br.close();
+				} catch (IOException e) {
+					throw new RuntimeException(e);
+				}
+			}
 		}
-
-		return sn;
 	}
 }
