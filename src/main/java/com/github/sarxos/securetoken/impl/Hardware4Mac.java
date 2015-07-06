@@ -39,11 +39,11 @@ public class Hardware4Mac {
 
 		BufferedReader br = new BufferedReader(new InputStreamReader(is));
 		String line = null;
-		String marker = "Serial Number:";
+		String marker = "Serial Number";
 		try {
 			while ((line = br.readLine()) != null) {
-				if (line.indexOf(marker) != -1) {
-					sn = line.split(marker)[1].trim();
+				if (line.contains(marker)) {
+					sn = line.split(":")[1].trim();
 					break;
 				}
 			}
